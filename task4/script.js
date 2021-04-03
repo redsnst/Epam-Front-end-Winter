@@ -1,10 +1,9 @@
 function memOverflow(){
-    let i = 0;
     let n = 9999999999999;
     list = [];
-    for(; i < n; i++){
+    for(let i=0; i < n; i++){
         per = 'obj' + i;
-        per  = new Object();
+        per = new Object();
         list += per;
     }
 }
