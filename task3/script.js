@@ -1,14 +1,30 @@
-var enterBlock = document.getElementById("enter");
+let enterBlock = document.getElementById("enter");
 enterBlock.innerHTML = "Enter end element:<input id=\"enterMax\" type=\"text\"></input>"
-var calcBlock = document.getElementById("calcul");
+let calcBlock = document.getElementById("calcul");
+
+function output(value, n){
+  if(n == 1){
+    calcBlock.innerHTML += "Result in cache: " + value;
+  }
+  else if(n == 2){
+    calcBlock.innerHTML += "The result exceeds the maximum possible";
+  }
+  else if(n == 3){
+    calcBlock.innerHTML += "Result: " + value;
+  }
+  else if(n == 4){
+    calcBlock.innerText += "Numbers set incorrectly, try again!";
+  }
+   
+}
 
 function calc(){
-    var min = 1, 
+    let min = 1, 
     max = Number(document.getElementById("enterMax").value);
     
     calcBlock.innerHTML = "Start: " + min + "<br>End:" + max +"<br>";
     if(min > max){
-        calcBlock.innerText += "Numbers set incorrectly, try again!";
+        output(0, 4);
     }
     else{
         
@@ -18,33 +34,33 @@ function calc(){
     }
 }
 
+
+
 var gauss = (function() {
-    var memo = {};
+    let memo = {};
+    
   
     function f(n) {
-      var value;
+      let value;
   
       if (n in memo) {
         value = memo[n];
-        if(value > Number.MAX_SAFE_INTEGER)
-        {
-            calcBlock.innerHTML += "The result exceeds the maximum possible";
-        }
-        else{
-        calcBlock.innerHTML += "Result in cache: " + value;
-        }
+        
+        output(value, 1);
+        
       } else {
         if (n === 1)
           value = n;
         else
           value = n * (n + 1) / 2;
   
-        memo[n] = value;
+        
         if(value > Number.MAX_SAFE_INTEGER){
-            calcBlock.innerHTML += "The result exceeds the maximum possible";
+            output(value, 2);
         }
         else{
-        calcBlock.innerHTML += "Result: " + value;
+        memo[n] = value;
+        output(value, 3)
         }
       }
   
